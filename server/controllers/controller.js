@@ -90,6 +90,18 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  console.log("get user");
+  try {
+    const { id } = req.params;
+    const user = await Users.findById(id);
+
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT, { expiresIn: "1h" });
 };
@@ -99,4 +111,5 @@ module.exports = {
   register,
   getUsers,
   deleteUser,
+  getUser,
 };

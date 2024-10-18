@@ -7,6 +7,10 @@ import Register from "./components/Register";
 import Signin from "./components/Signin";
 import Contact from "./components/Contact";
 import About from "./components/About";
+import Admin from "./components/Admin";
+import NotFound from "./components/NotFound";
+
+// "proxy": "http://localhost:5000/api/v1",
 
 export default function App() {
   return (
@@ -18,6 +22,8 @@ export default function App() {
         <Route exact path="/signin" element={<Signin />} />
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/about" element={<About />} />
+        <Route exact path="/admin" element={<Admin />} />
+        <Route exact path="/*" element={<NotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>

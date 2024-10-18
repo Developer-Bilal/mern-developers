@@ -6,6 +6,7 @@ const auth = require("../middlewares/auth.js");
 const {
   login,
   register,
+  getUser,
   getUsers,
   deleteUser,
 } = require("../controllers/controller.js");
@@ -13,6 +14,8 @@ const {
 routes.post("/register", register);
 
 routes.post("/login", login);
+
+routes.get("/user/:id", auth, getUser);
 
 routes.get("/admin/users", auth, getUsers);
 
