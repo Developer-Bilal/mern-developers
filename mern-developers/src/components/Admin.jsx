@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { json } from "react-router-dom";
 
 export default function Admin() {
   const [users, setUsers] = useState([]);
@@ -25,10 +24,27 @@ export default function Admin() {
         setIsAuthenticated(false);
         console.log(err);
       });
-  }, []);
+  }, [setUsers]);
 
-  const handleDelete = () => {
+  const handleDelete = (id) => {
     console.log("deleted");
+    //get token
+    const token = JSON.parse(localStorage.getItem("user")).token;
+    //verify token and delete
+    axios
+      .delete(`/admin/user/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(`User with ${id} deleted!`);
+        console.log(res);
+        setUsers((users) => users.filter((user) => user._id !== id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -63,7 +79,7 @@ export default function Admin() {
                         Edit
                       </button>
                       <button
-                        onClick={handleDelete}
+                        onClick={() => handleDelete(user._id)}
                         className="bg-red-400 px-4 py-1 rounded"
                       >
                         Delete
