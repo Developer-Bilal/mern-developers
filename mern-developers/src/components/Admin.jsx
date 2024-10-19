@@ -50,7 +50,7 @@ export default function Admin() {
           <tbody className="text-gray-700">
             {users.map((user) => {
               return (
-                <tr className="hover:bg-gray-100">
+                <tr className="hover:bg-gray-100" key={user._id}>
                   <td className="py-3 px-4 border-2 border-gray-300">
                     {user.name}
                   </td>

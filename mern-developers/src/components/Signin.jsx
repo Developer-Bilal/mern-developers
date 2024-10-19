@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Signin() {
+export default function Signin({ isUser, setIsUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ export default function Signin() {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("user", JSON.stringify(res.data));
+        setIsUser(true);
         navigate("/");
       })
       .catch((err) => {

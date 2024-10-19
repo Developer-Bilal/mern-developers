@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Register() {
+export default function Register({ isUser, setIsUser }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -21,6 +21,7 @@ export default function Register() {
       .post("/register", data)
       .then((res) => {
         console.log(res.data);
+        setIsUser(true);
         navigate("/");
       })
       .catch((err) => {
